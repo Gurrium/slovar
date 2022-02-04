@@ -26,7 +26,8 @@ class LetterAdapter(private val context: Context): RecyclerView.Adapter<LetterAd
     }
 
     override fun onBindViewHolder(holder: LetterViewHolder, position: Int) {
-        TODO("Not yet implemented")
+        // ここはビューにデータを紐付けるためのメソッドなのでそれをしている
+        holder.textView.text = dataset[position]
     }
 
     override fun getItemCount() = dataset.size
