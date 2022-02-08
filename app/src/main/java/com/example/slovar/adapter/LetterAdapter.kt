@@ -2,11 +2,11 @@ package com.example.slovar.adapter
 
 import android.content.Context
 import android.content.Intent
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
-import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.slovar.DetailActivity
 import com.example.slovar.R
@@ -15,7 +15,7 @@ class LetterAdapter(private val context: Context): RecyclerView.Adapter<LetterAd
     private val dataset = listOf<String>("А", "Б", "С")
 
     class LetterViewHolder(val view: View) : RecyclerView.ViewHolder(view) {
-        val button: Button = view.findViewById(R.id.letter)
+        val button: Button? = view.findViewById(R.id.letter)
     }
 
     // parent: ViewHolderがもつ、リスト内の要素のビューがattachされる先
@@ -30,10 +30,12 @@ class LetterAdapter(private val context: Context): RecyclerView.Adapter<LetterAd
 
     override fun onBindViewHolder(holder: LetterViewHolder, position: Int) {
         // ここはビューにデータを紐付けるためのメソッドなのでそれをしている
-        holder.button.text = dataset[position]
-        holder.button.setOnClickListener {
+        holder.button?.text = dataset[position]
+        holder.button?.setOnClickListener {
             val context = holder.view.context
             val intent = Intent(context, DetailActivity::class.java)
+            Log.d("Action", intent.action.toString())
+            Log.d("Categories", intent.categories?.joinToString().toString())
             intent.putExtra("letter", holder.button.text.toString())
             context.startActivity(intent)
         }
