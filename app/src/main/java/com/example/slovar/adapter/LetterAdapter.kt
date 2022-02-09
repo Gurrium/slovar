@@ -2,7 +2,6 @@ package com.example.slovar.adapter
 
 import android.content.Context
 import android.content.Intent
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,7 +14,7 @@ class LetterAdapter(private val context: Context): RecyclerView.Adapter<LetterAd
     private val dataset = listOf<String>("А", "Б", "С")
 
     class LetterViewHolder(val view: View) : RecyclerView.ViewHolder(view) {
-        val button: Button? = view.findViewById(R.id.letter)
+        val button: Button? = view.findViewById(R.id.item)
     }
 
     // parent: ViewHolderがもつ、リスト内の要素のビューがattachされる先
@@ -34,8 +33,6 @@ class LetterAdapter(private val context: Context): RecyclerView.Adapter<LetterAd
         holder.button?.setOnClickListener {
             val context = holder.view.context
             val intent = Intent(context, DetailActivity::class.java)
-            Log.d("Action", intent.action.toString())
-            Log.d("Categories", intent.categories?.joinToString().toString())
             intent.putExtra("letter", holder.button.text.toString())
             context.startActivity(intent)
         }
